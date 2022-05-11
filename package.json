@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/codyeddie/portfolio-generator/issues"
   },
-  "homepage": "https://github.com/codyeddie/portfolio-generator#readme"
+  "homepage": "https://github.com/codyeddie/portfolio-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
 }
