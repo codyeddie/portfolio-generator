@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const { type } = require('os');
-
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -68,7 +69,7 @@ Add a New Project
         {
             type: 'input',
             name: 'name',
-            message: 'WHat is the name of your project?',
+            message: 'What is the name of your project?',
             validate: nameInput => {
                 if (nameInput) {
                     return true;
@@ -135,18 +136,16 @@ Add a New Project
 
 promptUser()
     .then(promptProject)
-    .then(portfolioData => {
-        console.log(portfolioData);
+    .then(mockData => {
+        //changing portfolio data to mockdata temp
+        const pageHTML = generatePage(mockData);
+        
+        fs.writeFile('index.html', generatePage(mockData), err => {
+            if (err) throw err;
+
+            console.log('Portfolio complete! Checkout index.html to see the output!');
+        });
     });
 
 
-// const fs = require('fs');
-// const generatePage = require('./src/page-template.js');
 
-// const pageHTML = generatePage(name, github);
-
-// fs.writeFile('index.html', generatePage(name, github), err => {
-//     if (err) throw err;
-
-//     console.log('Portfolio complete! Checkout index.html to see the output!');
-// });
