@@ -136,14 +136,22 @@ Add a New Project
 
 promptUser()
     .then(promptProject)
-    .then(mockData => {
+    .then(portfolioData => {
         //changing portfolio data to mockdata temp
-        const pageHTML = generatePage(mockData);
-        
-        fs.writeFile('index.html', generatePage(mockData), err => {
+        const pageHTML = generatePage(portfolioData);
+
+        fs.writeFile('./dist/index.html', generatePage(portfolioData), err => {
             if (err) throw err;
 
             console.log('Portfolio complete! Checkout index.html to see the output!');
+
+            fs.copyFile('./src/style.css', './dist/style.css', err => {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log('Style sheet copied successfully!');
+            })
         });
     });
 
